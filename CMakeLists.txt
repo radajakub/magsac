@@ -1,12 +1,14 @@
 cmake_minimum_required(VERSION 3.8)
 
+include("gcc-toolchain.cmake")
+
 project(MAGSAC LANGUAGES CXX)
 
 # indicate if OPENMP should be enabled
-option(USE_OPENMP "Use OPENMP" ON)
+option(USE_OPENMP "Use OPENMP" OFF)
 
 # indicate if the sample project should be generated
-option(CREATE_SAMPLE_PROJECT "Create the Sample Project" ON)
+option(CREATE_SAMPLE_PROJECT "Create the Sample Project" OFF)
 
 SET (CMAKE_BUILD_TYPE "RELEASE")
 
@@ -25,6 +27,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_FLAGS "-fpermissive")
 set(CMAKE_CXX_FLAGS "-fPIC")
+set(CMAKE_CXX_FLAGS "-Wno-template-body")
 # ==============================================================================
 # Find OpenCV
 # ==============================================================================
@@ -144,7 +147,8 @@ target_link_libraries(${PROJECT_NAME}
 	gflags
 )
 
-install(TARGETS pymagsac DESTINATION .)
+# Install the Python module properly for scikit-build
+install(TARGETS pymagsac LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX})
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 	
