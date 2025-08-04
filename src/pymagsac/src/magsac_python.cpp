@@ -444,17 +444,17 @@ int findEssentialMatrix_(std::vector<double>& correspondences,
     }
 
     // Apply bundle adjustment on the final points
-    if (num_inliers > 5)
-    {   
-        std::vector<gcransac::Model> models = { model };
-		gcransac::estimator::solver::EssentialMatrixBundleAdjustmentSolver bundleOptimizer;
-		bundleOptimizer.estimateModel(
-			normalized_points,
-			&inlier_indices[0],
-			inlier_indices.size(),
-			models,
-			&weights[0]);
-    }
+    // if (num_inliers > 5)
+    // {   
+    //     std::vector<gcransac::Model> models = { model };
+	// 	gcransac::estimator::solver::EssentialMatrixBundleAdjustmentSolver bundleOptimizer;
+	// 	bundleOptimizer.estimateModel(
+	// 		normalized_points,
+	// 		&inlier_indices[0],
+	// 		inlier_indices.size(),
+	// 		models,
+	// 		&weights[0]);
+    // }
 			
 
     E.resize(9);
